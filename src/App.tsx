@@ -1,16 +1,16 @@
-import { useState } from 'react'
+import { useState } from "react";
+import NavBar from "./components/navbar";
+
 import HomePage from "./components/homepage";
-import './App.css'
+import AbstractPage from "./components/abstract";
+import "./App.css";
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
     <>
-    <HomePage />
+      <NavBar />={" "}
     </>
-    
-  )
+  );
 }
 
-export default App
+export default App;
