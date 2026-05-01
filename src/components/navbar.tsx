@@ -62,16 +62,6 @@ function NavBar() {
           </div>
         </div>
       </nav>
-
-      <main>
-        {activePage === "home" ? (
-          <HomePage />
-        ) : activePage === "abstract" ? (
-          <AbstractPage />
-        ) : (
-          <div className="p-8">Page under construction</div>
-        )}
-      </main>
     </>
   );
 }

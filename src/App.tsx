@@ -6,9 +6,20 @@ import AbstractPage from "./components/abstract";
 import "./App.css";
 
 function App() {
+  const [activePage, setActivePage] = useState("home");
+
   return (
     <>
-      <NavBar />={" "}
+      <NavBar activePage={activePage} setActivePage={setActivePage} />
+      <main>
+        {activePage === "home" ? (
+          <HomePage />
+        ) : activePage === "abstract" ? (
+          <AbstractPage />
+        ) : (
+          <div className="p-8">Page under construction</div>
+        )}
+      </main>
     </>
   );
 }
