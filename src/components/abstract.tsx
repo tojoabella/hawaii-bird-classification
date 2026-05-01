@@ -26,21 +26,6 @@ function AbstractPage() {
               propose a novel machine learning model capable of effectively
               categorizing bird species into native and nonnative classes, thus
               facilitating ecological research and conservations efforts.
-              {/*               
-               We
-              evaluate four distinct neural network models—VGG19, ResNet,
-              InceptionV3, and a custom bespoke architecture—on a dataset of
-              10,000 labeled bird images across 16 species. */}
-            </p>
-            <p>
-              Our ensemble approach combines predictions from all four models to
-              achieve an average accuracy of 94.2% on held-out test data. The
-              system demonstrates robust performance across varying image
-              conditions, lighting, and angles, providing a practical tool for
-              ecological monitoring and invasive species detection. Results
-              indicate that multi-scale feature extraction and ensemble methods
-              significantly improve classification reliability compared to
-              single-model approaches.
             </p>
           </div>
         </section>
