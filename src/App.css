@@ -84,7 +84,7 @@
   }
 
   .icon {
-    margin-bottom: 16px;
+    margin-bottom: 1px;
     width: 22px;
     height: 22px;
   }
@@ -96,7 +96,7 @@
 }
 
 #docs {
-  border-right: 1px solid var(--border);
+  border-right: 10px solid var(--border);
 
   @media (max-width: 1024px) {
     border-right: none;
