@@ -40,12 +40,12 @@ function ImagePlaceholder() {
 
 function HomePage() {
   return (
-    <div>
+    <>
       <NavBar />
       <div className="flex justify-center items-center h-screen">
         <ImagePlaceholder />
       </div>
-    </div>
+    </>
   );
 }
 
