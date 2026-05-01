@@ -1,8 +1,4 @@
 import { useState } from "react";
-
-import HomePage from "./homepage";
-import AbstractPage from "./abstract";
-
 function NavBar({
   activePage,
   setActivePage,
