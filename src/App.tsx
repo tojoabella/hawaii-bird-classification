@@ -3,6 +3,8 @@ import NavBar from "./components/navbar";
 
 import HomePage from "./components/homepage";
 import AbstractPage from "./components/abstract";
+import ModelsPage from "./components/models";
+
 import "./App.css";
 
 function App() {
@@ -16,6 +18,8 @@ function App() {
           <HomePage />
         ) : activePage === "abstract" ? (
           <AbstractPage />
+        ) : activePage === "models" ? (
+          <ModelsPage />
         ) : (
           <div className="p-8">Page under construction</div>
         )}
