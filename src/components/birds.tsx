@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 type Species = {
   scientificName: string;
   commonName: string;
@@ -5,51 +7,199 @@ type Species = {
 };
 
 const species: Species[] = [
-  { scientificName: "Tringa incana", commonName: "Wandering Tattler", native: true },
+  {
+    scientificName: "Tringa incana",
+    commonName: "Wandering Tattler",
+    native: true,
+  },
   { scientificName: "Fulica alai", commonName: "Hawaiian Coot", native: true },
-  { scientificName: "Branta sandvicensis", commonName: "Nene (Hawaiian Goose)", native: true },
-  { scientificName: "Nycticorax nycticorax", commonName: "Black-crowned Night Heron", native: true },
-  { scientificName: "Phoebastria immutabilis", commonName: "Laysan Albatross", native: true },
-  { scientificName: "Himatione sanguinea", commonName: "Apapane", native: true },
-  { scientificName: "Himantopus mexicanus knudseni", commonName: "Hawaiian Stilt", native: true },
-  { scientificName: "Pluvialis fulva", commonName: "Pacific Golden-Plover", native: true },
+  {
+    scientificName: "Branta sandvicensis",
+    commonName: "Nene (Hawaiian Goose)",
+    native: true,
+  },
+  {
+    scientificName: "Nycticorax nycticorax",
+    commonName: "Black-crowned Night Heron",
+    native: true,
+  },
+  {
+    scientificName: "Phoebastria immutabilis",
+    commonName: "Laysan Albatross",
+    native: true,
+  },
+  {
+    scientificName: "Himatione sanguinea",
+    commonName: "Apapane",
+    native: true,
+  },
+  {
+    scientificName: "Himantopus mexicanus knudseni",
+    commonName: "Hawaiian Stilt",
+    native: true,
+  },
+  {
+    scientificName: "Pluvialis fulva",
+    commonName: "Pacific Golden-Plover",
+    native: true,
+  },
   { scientificName: "Sula sula", commonName: "Red-footed Booby", native: true },
-  { scientificName: "Fregata minor", commonName: "Great Frigatebird", native: true },
-  { scientificName: "Arenaria interpres", commonName: "Ruddy Turnstone", native: true },
-  { scientificName: "Ardenna pacifica", commonName: "Wedge-tailed Shearwater", native: true },
+  {
+    scientificName: "Fregata minor",
+    commonName: "Great Frigatebird",
+    native: true,
+  },
+  {
+    scientificName: "Arenaria interpres",
+    commonName: "Ruddy Turnstone",
+    native: true,
+  },
+  {
+    scientificName: "Ardenna pacifica",
+    commonName: "Wedge-tailed Shearwater",
+    native: true,
+  },
   { scientificName: "Gygis alba", commonName: "White Tern", native: true },
   { scientificName: "Drepanis coccinea", commonName: "Iiwi", native: true },
-  { scientificName: "Phaethon lepturus", commonName: "White-tailed Tropicbird", native: true },
-  { scientificName: "Chlorodrepanis virens", commonName: "Hawaii Amakihi", native: true },
-  { scientificName: "Estrilda astrild", commonName: "Common Waxbill", native: false },
-  { scientificName: "Paroaria coronata", commonName: "Red-crested Cardinal", native: false },
-  { scientificName: "Gallus gallus domesticus", commonName: "Domestic Chicken", native: false },
-  { scientificName: "Sicalis flaveola", commonName: "Saffron Finch", native: false },
-  { scientificName: "Bubulcus ibis", commonName: "Cattle Egret", native: false },
-  { scientificName: "Columba livia domestica", commonName: "Rock Pigeon", native: false },
-  { scientificName: "Zosterops japonicus", commonName: "Warbling White-eye", native: false },
-  { scientificName: "Haemorhous mexicanus", commonName: "House Finch", native: false },
-  { scientificName: "Cardinalis cardinalis", commonName: "Northern Cardinal", native: false },
-  { scientificName: "Passer domesticus", commonName: "House Sparrow", native: false },
-  { scientificName: "Acridotheres tristis", commonName: "Common Myna", native: false },
-  { scientificName: "Paroaria capitata", commonName: "Yellow-billed Cardinal", native: false },
-  { scientificName: "Padda oryzivora", commonName: "Java Sparrow", native: false },
-  { scientificName: "Pycnonotus cafer", commonName: "Red-vented Bulbul", native: false },
-  { scientificName: "Ortygornis pondicerianus", commonName: "Gray Francolin", native: false },
-  { scientificName: "Geopelia striata", commonName: "Zebra Dove", native: false },
-  { scientificName: "Gallus gallus", commonName: "Red Junglefowl", native: false },
-  { scientificName: "Spilopelia chinensis", commonName: "Spotted Dove", native: false },
-  { scientificName: "Lophura leucomelanos", commonName: "Kalij Pheasant", native: false },
-  { scientificName: "Crithagra mozambica", commonName: "Yellow-fronted Canary", native: false },
-  { scientificName: "Cairina moschata domestica", commonName: "Domestic Muscovy Duck", native: false },
-  { scientificName: "Lonchura atricapilla", commonName: "Chestnut Munia", native: false },
-  { scientificName: "Lonchura punctulata", commonName: "Scaly-breasted Munia", native: false },
-  { scientificName: "Psittacula krameri", commonName: "Rose-ringed Parakeet", native: false },
+  {
+    scientificName: "Phaethon lepturus",
+    commonName: "White-tailed Tropicbird",
+    native: true,
+  },
+  {
+    scientificName: "Chlorodrepanis virens",
+    commonName: "Hawaii Amakihi",
+    native: true,
+  },
+  {
+    scientificName: "Estrilda astrild",
+    commonName: "Common Waxbill",
+    native: false,
+  },
+  {
+    scientificName: "Paroaria coronata",
+    commonName: "Red-crested Cardinal",
+    native: false,
+  },
+  {
+    scientificName: "Gallus gallus domesticus",
+    commonName: "Domestic Chicken",
+    native: false,
+  },
+  {
+    scientificName: "Sicalis flaveola",
+    commonName: "Saffron Finch",
+    native: false,
+  },
+  {
+    scientificName: "Bubulcus ibis",
+    commonName: "Cattle Egret",
+    native: false,
+  },
+  {
+    scientificName: "Columba livia domestica",
+    commonName: "Rock Pigeon",
+    native: false,
+  },
+  {
+    scientificName: "Zosterops japonicus",
+    commonName: "Warbling White-eye",
+    native: false,
+  },
+  {
+    scientificName: "Haemorhous mexicanus",
+    commonName: "House Finch",
+    native: false,
+  },
+  {
+    scientificName: "Cardinalis cardinalis",
+    commonName: "Northern Cardinal",
+    native: false,
+  },
+  {
+    scientificName: "Passer domesticus",
+    commonName: "House Sparrow",
+    native: false,
+  },
+  {
+    scientificName: "Acridotheres tristis",
+    commonName: "Common Myna",
+    native: false,
+  },
+  {
+    scientificName: "Paroaria capitata",
+    commonName: "Yellow-billed Cardinal",
+    native: false,
+  },
+  {
+    scientificName: "Padda oryzivora",
+    commonName: "Java Sparrow",
+    native: false,
+  },
+  {
+    scientificName: "Pycnonotus cafer",
+    commonName: "Red-vented Bulbul",
+    native: false,
+  },
+  {
+    scientificName: "Ortygornis pondicerianus",
+    commonName: "Gray Francolin",
+    native: false,
+  },
+  {
+    scientificName: "Geopelia striata",
+    commonName: "Zebra Dove",
+    native: false,
+  },
+  {
+    scientificName: "Gallus gallus",
+    commonName: "Red Junglefowl",
+    native: false,
+  },
+  {
+    scientificName: "Spilopelia chinensis",
+    commonName: "Spotted Dove",
+    native: false,
+  },
+  {
+    scientificName: "Lophura leucomelanos",
+    commonName: "Kalij Pheasant",
+    native: false,
+  },
+  {
+    scientificName: "Crithagra mozambica",
+    commonName: "Yellow-fronted Canary",
+    native: false,
+  },
+  {
+    scientificName: "Cairina moschata domestica",
+    commonName: "Domestic Muscovy Duck",
+    native: false,
+  },
+  {
+    scientificName: "Lonchura atricapilla",
+    commonName: "Chestnut Munia",
+    native: false,
+  },
+  {
+    scientificName: "Lonchura punctulata",
+    commonName: "Scaly-breasted Munia",
+    native: false,
+  },
+  {
+    scientificName: "Psittacula krameri",
+    commonName: "Rose-ringed Parakeet",
+    native: false,
+  },
   { scientificName: "Alectoris chukar", commonName: "Chukar", native: false },
-  { scientificName: "Leiothrix lutea", commonName: "Red-billed Leiothrix", native: false },
+  {
+    scientificName: "Leiothrix lutea",
+    commonName: "Red-billed Leiothrix",
+    native: false,
+  },
 ];
 
-function BirdsPage() {
+function BirdsTable() {
   return (
     <div className="p-8">
       <h1 className="text-3xl font-bold mb-6 text-center">Species</h1>
@@ -71,6 +221,22 @@ function BirdsPage() {
           ))}
         </tbody>
       </table>
+    </div>
+  );
+}
+function BirdsPage() {
+  const [showTable, setShowTable] = useState(true);
+  return (
+    <div>
+      <button
+        className="cursor-pointer mt-4 bg-blue-500 text-white py-2 px-4 rounded"
+        onClick={() => {
+          setShowTable(!showTable);
+        }}
+      >
+        {showTable ? "Hide Birds Table" : "Show Birds Table"}
+      </button>
+      {showTable && <BirdsTable />}
     </div>
   );
 }
