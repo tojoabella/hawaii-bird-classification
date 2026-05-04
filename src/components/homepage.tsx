@@ -3,13 +3,16 @@ import { useState } from "react";
 function ImagePlaceholder() {
   return (
     <div className="flex flex-col justify-center items-center w-128 h-64 bg-gray-300 rounded-lg">
-      <div className="">Image Placeholder</div>
-      <button className="mx-4 px-4 py-2 bg-blue-500 text-white hover:bg-blue-600 rounded">
-        Path
+      <p className="text-gray-700 text-center">
+        Drag and drop an image here, or click to browse
+      </p>
+      <button className="mx-4 px-4 py-2 bg-black text-white hover:bg-blue-600 rounded-lg mt-4">
+        Select Image
       </button>
     </div>
   );
 }
+
 function ModelCard({
   modelName,
   prediction,
@@ -19,8 +22,8 @@ function ModelCard({
 }) {
   return (
     <div className="bg-white rounded-lg shadow p-6">
-      <h3 className="text-lg font-bold mb-2">{modelName}</h3>
-      <p className="text-gray-700">Prediction: {prediction}</p>
+      <h3 className="text-lg font-bold ">{modelName}</h3>
+      <p className="text-gray-700 py-2">Prediction: {prediction}</p>
     </div>
   );
 }
