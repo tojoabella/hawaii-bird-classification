@@ -6,24 +6,58 @@ import resnet from "../assets/resnet_architecture.png";
 import custom from "../assets/custom_architecture.png";
 
 const models = [
-  { name: "VGG19", image: vgg19 },
-  { name: "Inceptionv3", image: inceptionv3 },
-  { name: "ResNet50v2", image: resnet },
-  { name: "Custom", image: custom },
+  {
+    name: "VGG19",
+    image: vgg19,
+    paper: "https://arxiv.org/abs/1409.1556",
+    tensorflow:
+      "https://www.tensorflow.org/api_docs/python/tf/keras/applications/vgg19",
+  },
+  {
+    name: "Inceptionv3",
+    image: inceptionv3,
+    paper: "https://arxiv.org/abs/1512.00567",
+    tensorflow:
+      "https://www.tensorflow.org/api_docs/python/tf/keras/applications/inceptionv3",
+  },
+  {
+    name: "ResNet50v2",
+    image: resnet,
+    paper: "https://arxiv.org/abs/1512.03385",
+    tensorflow:
+      "https://www.tensorflow.org/api_docs/python/tf/keras/applications/resnet50v2",
+  },
+  { name: "Custom", image: custom, paper: "#", tensorflow: "#" },
 ];
 
-function ShowArchitecture(activeSet: Set<string>) {
+function ShowArchitecture({ activeSet }: { activeSet: Set<string> }) {
   return (
-    <div className="flex items-center justify-center h-screen">
+    <div className="flex items-center justify-top flex-wrap mt-10 border-t">
       {Array.from(activeSet).map((modelName) => {
         const model = models.find((m) => m.name === modelName);
         if (!model) return null;
         return (
           <>
-            <div className="flex flex-col items-center justify-center">
+            <div className="flex flex-col items-center justify-center gap-10">
               <p className="text-2xl font-bold mb-4">
                 {modelName} Architecture
               </p>
+              {model.paper !== "#" && (
+                <a
+                  href={model.paper}
+                  className="text-blue-600 underline hover:text-blue-800"
+                >
+                  Research paper
+                </a>
+              )}
+              {model.tensorflow !== "#" && (
+                <a
+                  href={model.tensorflow}
+                  className="text-blue-600 underline hover:text-blue-800"
+                >
+                  Tensorflow documentation
+                </a>
+              )}
               <img src={model.image} alt={modelName} className="m-4" />
             </div>
           </>
@@ -92,7 +126,7 @@ function ModelsPage() {
           );
         })}
       </div>
-      {ShowArchitecture(shownArchitectures)}
+      <ShowArchitecture activeSet={shownArchitectures} />
     </>
   );
 }
