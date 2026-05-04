@@ -1,38 +1,51 @@
 import { useState } from "react";
 
-import vgg19 from "../assets/vgg19_architecture.png";
-import inceptionv3 from "../assets/inceptionv3_architecture.png";
-import resnet from "../assets/resnet_architecture.png";
-import custom from "../assets/custom_architecture.png";
+import vgg19_architecture from "../assets/vgg19_architecture.png";
+import inceptionv3_architecture from "../assets/inceptionv3_architecture.png";
+import resnet_architecture from "../assets/resnet_architecture.png";
+import custom_architecture from "../assets/custom_architecture.png";
+import vgg19_results from "../assets/vgg19_results.png";
+import inceptionv3_results from "../assets/inceptionv3_results.png";
+import resnet_results from "../assets/resnet_results.png";
+import custom_results from "../assets/custom_results.png";
 
 const models = [
   {
     name: "VGG19",
-    image: vgg19,
+    image: vgg19_architecture,
+    results: vgg19_results,
     paper: "https://arxiv.org/abs/1409.1556",
     tensorflow:
-      "https://www.tensorflow.org/api_docs/python/tf/keras/applications/vgg19",
+      "https://www.tensorflow.org/api_docs/python/tf/keras/applications/VGG19",
   },
   {
     name: "Inceptionv3",
-    image: inceptionv3,
+    image: inceptionv3_architecture,
+    results: inceptionv3_results,
     paper: "https://arxiv.org/abs/1512.00567",
     tensorflow:
-      "https://www.tensorflow.org/api_docs/python/tf/keras/applications/inceptionv3",
+      "https://www.tensorflow.org/api_docs/python/tf/keras/applications/InceptionV3",
   },
   {
     name: "ResNet50v2",
-    image: resnet,
-    paper: "https://arxiv.org/abs/1512.03385",
+    image: resnet_architecture,
+    results: resnet_results,
+    paper: "https://arxiv.org/abs/1603.05027",
     tensorflow:
       "https://www.tensorflow.org/api_docs/python/tf/keras/applications/resnet50v2",
   },
-  { name: "Custom", image: custom, paper: "#", tensorflow: "#" },
+  {
+    name: "Custom",
+    image: custom_architecture,
+    results: custom_results,
+    paper: "#",
+    tensorflow: "#",
+  },
 ];
 
 function ShowArchitecture({ activeSet }: { activeSet: Set<string> }) {
   return (
-    <div className="flex items-center justify-top flex-wrap mt-10 border-t">
+    <div className="flex justify-center items-start content-start flex-wrap mt-10 border-t">
       {Array.from(activeSet).map((modelName) => {
         const model = models.find((m) => m.name === modelName);
         if (!model) return null;
@@ -67,12 +80,33 @@ function ShowArchitecture({ activeSet }: { activeSet: Set<string> }) {
   );
 }
 
+function ShowResults({ activeSet }: { activeSet: Set<string> }) {
+  return (
+    <div className="flex justify-center items-start content-start flex-wrap mt-10 border-t">
+      {Array.from(activeSet).map((modelName) => {
+        const model = models.find((m) => m.name === modelName);
+        if (!model) return null;
+        return (
+          <>
+            <div className="flex flex-col items-center justify-center gap-10">
+              <p className="text-2xl font-bold mb-4">{modelName} Results</p>
+              <img src={model.results} alt={`${modelName} results`} />
+            </div>
+          </>
+        );
+      })}
+    </div>
+  );
+}
+
 function ModelCard({
   modelName,
-  onToggle,
+  onToggleArchitecture,
+  onToggleResults,
 }: {
   modelName: string;
-  onToggle: (modelName: string) => void;
+  onToggleArchitecture: (modelName: string) => void;
+  onToggleResults: (modelName: string) => void;
 }) {
   /*
     Note: In react, arguments are called props, and props must be a single object passed from parent to child. Instead of passing multiple arguments to ModelCard, we pass a single object that contains all the necessary information (modelName and onToggle function).
@@ -85,10 +119,18 @@ function ModelCard({
       <button
         className="mt-4 bg-blue-500 text-white py-2 px-4 rounded"
         onClick={() => {
-          onToggle(modelName);
+          onToggleArchitecture(modelName);
         }}
       >
-        View Details
+        View Architecture
+      </button>
+      <button
+        className="mt-4 bg-green-500 text-white py-2 px-4 rounded"
+        onClick={() => {
+          onToggleResults(modelName);
+        }}
+      >
+        View Results
       </button>
     </div>
   );
@@ -102,8 +144,9 @@ function ModelsPage() {
   const [shownArchitectures, setShownArchitectures] = useState<Set<string>>(
     new Set(),
   );
+  const [shownResults, setShownResults] = useState<Set<string>>(new Set());
 
-  const onToggle = (modelName: string) => {
+  const onToggleArchitecture = (modelName: string) => {
     const newShown = new Set(shownArchitectures);
     if (newShown.has(modelName)) {
       newShown.delete(modelName);
@@ -111,6 +154,16 @@ function ModelsPage() {
       newShown.add(modelName);
     }
     setShownArchitectures(newShown);
+  };
+
+  const onToggleResults = (modelName: string) => {
+    const newShown = new Set(shownResults);
+    if (newShown.has(modelName)) {
+      newShown.delete(modelName);
+    } else {
+      newShown.add(modelName);
+    }
+    setShownResults(newShown);
   };
 
   return (
@@ -121,12 +174,14 @@ function ModelsPage() {
             <ModelCard
               key={model.name}
               modelName={model.name}
-              onToggle={onToggle}
+              onToggleArchitecture={onToggleArchitecture}
+              onToggleResults={onToggleResults}
             />
           );
         })}
       </div>
       <ShowArchitecture activeSet={shownArchitectures} />
+      <ShowResults activeSet={shownResults} />
     </>
   );
 }
