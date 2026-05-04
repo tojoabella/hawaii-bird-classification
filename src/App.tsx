@@ -6,6 +6,7 @@ import AbstractPage from "./components/abstract";
 import ModelsPage from "./components/models";
 
 import "./App.css";
+import BirdsPage from "./components/birds";
 
 function App() {
   const [activePage, setActivePage] = useState("home");
@@ -20,6 +21,8 @@ function App() {
           <AbstractPage />
         ) : activePage === "models" ? (
           <ModelsPage />
+        ) : activePage === "birds" ? (
+          <BirdsPage />
         ) : (
           <div className="p-8">Page under construction</div>
         )}
