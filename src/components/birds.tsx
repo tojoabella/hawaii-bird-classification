@@ -289,6 +289,11 @@ function BirdsPage() {
       <h2 className="text-2xl font-bold mb-4 text-center tracking-wide uppercase text-gray-800">
         Birds of Hawaii used in our Dataset
       </h2>
+      <p className="text-2xl font-bold mb-4 text-center tracking-wide uppercase text-gray-800">
+        Note: this is not all birds in the dataset, just the ones we have images
+        for.
+      </p>
+      {/* NATIVE ONLY BUTTON */}
       <button
         className={`cursor-pointer text-white rounded m-2 p-2 ${
           nativeOnly ? "bg-gray-500" : "bg-blue-900"
@@ -300,6 +305,7 @@ function BirdsPage() {
       >
         Native Only
       </button>
+      {/* INTRODUCED ONLY BUTTON */}
       <button
         className={`cursor-pointer text-white rounded m-2 p-2 ${
           introducedOnly ? "bg-gray-500" : "bg-blue-900"
@@ -311,7 +317,15 @@ function BirdsPage() {
       >
         Introduced Only
       </button>
-
+      {/* BIRDS TABLE BUTTON */}
+      <button
+        className="cursor-pointer mt-4 bg-blue-900 text-white py-2 px-4 rounded"
+        onClick={() => {
+          setShowTable(!showTable);
+        }}
+      >
+        {showTable ? "Hide Birds Table" : "Show Birds Table"}
+      </button>
       <div className="flex justify-center items-start content-start flex-wrap mt-10 gap-10">
         {species
           .filter((s) => !nativeOnly || s.native)
@@ -320,15 +334,6 @@ function BirdsPage() {
             return <BirdCard key={s.scientificName} species={s} />;
           })}
       </div>
-
-      <button
-        className="cursor-pointer mt-4 bg-blue-500 text-white py-2 px-4 rounded"
-        onClick={() => {
-          setShowTable(!showTable);
-        }}
-      >
-        {showTable ? "Hide Birds Table" : "Show Birds Table"}
-      </button>
       {showTable && <BirdsTable />}
     </div>
   );
