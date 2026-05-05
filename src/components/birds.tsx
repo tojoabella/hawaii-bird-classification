@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { use, useState } from "react";
 
 // an object mapping bird image file paths to their URLs
 /*
@@ -269,7 +269,7 @@ function BirdCard({ species }: { species: Species }) {
           className="w-48 h-48 object-cover mx-auto mb-3 rounded"
         />
       )}
-      <h3 className="text-lg font-bold text-center">{species.commonName}</h3>
+      <p className="text-lg font-bold text-center">{species.commonName}</p>
       <p className="text-gray-700 italic text-center">
         {species.scientificName}
       </p>
@@ -282,12 +282,43 @@ function BirdCard({ species }: { species: Species }) {
 
 function BirdsPage() {
   const [showTable, setShowTable] = useState(true);
+  const [nativeOnly, setNativeOnly] = useState(false);
+  const [introducedOnly, setIntroducedOnly] = useState(false);
   return (
     <div>
+      <h2 className="text-2xl font-bold mb-4 text-center tracking-wide uppercase text-gray-800">
+        Birds of Hawaii used in our Dataset
+      </h2>
+      <button
+        className={`cursor-pointer text-white rounded m-2 p-2 ${
+          nativeOnly ? "bg-gray-500" : "bg-blue-900"
+        }`}
+        onClick={() => {
+          setNativeOnly(!nativeOnly);
+          if (introducedOnly) setIntroducedOnly(false);
+        }}
+      >
+        Native Only
+      </button>
+      <button
+        className={`cursor-pointer text-white rounded m-2 p-2 ${
+          introducedOnly ? "bg-gray-500" : "bg-blue-900"
+        }`}
+        onClick={() => {
+          setIntroducedOnly(!introducedOnly);
+          if (nativeOnly) setNativeOnly(false);
+        }}
+      >
+        Introduced Only
+      </button>
+
       <div className="flex justify-center items-start content-start flex-wrap mt-10 gap-10">
-        {species.map((s) => {
-          return <BirdCard key={s.scientificName} species={s} />;
-        })}
+        {species
+          .filter((s) => !nativeOnly || s.native)
+          .filter((s) => !introducedOnly || !s.native)
+          .map((s) => {
+            return <BirdCard key={s.scientificName} species={s} />;
+          })}
       </div>
 
       <button
