@@ -1,5 +1,38 @@
 import { useState } from "react";
 
+// an object mapping bird image file paths to their URLs
+/*
+  "../assets/birds/Tringa incana.jpg": "/src/assets/birds/Tringa%20incana.jpg",
+  "../assets/birds/Fulica alai.jpg":   "/src/assets/birds/Fulica%20alai.jpg",
+  ...
+}
+*/
+const birdImages = import.meta.glob<string>("../assets/birds/*.jpg", {
+  eager: true,
+  import: "default",
+  query: "?url",
+});
+
+const imageByName: Record<string, string> = Object.fromEntries(
+  // Object.entries() converts an object (birdImages) to an array of [key, value] (path, url) arrays, which we can then map over
+  // we use array destructuring to unpack the path and url from each entry. We could have just done: .map((entry) => { const [path, url] = entry; ... }) but this is more concise
+  // .map() runs the callback on every element and collects the results into a new array, which we then convert back to an object with Object.fromEntries()
+  // before from Entries, map returns: [[name1, url1], ...]
+  Object.entries(birdImages).map(([path, url]) => {
+    // Get the filename without extension and convert to lowercase - should be the species name
+    const name = path
+      .split("/")
+      .pop()!
+      .replace(/\.jpg$/i, "");
+    return [name.toLowerCase(), url];
+  }),
+);
+
+function getBirdImage(scientificName: string): string | undefined {
+  // returns the URL of the bird image for the given scientific name
+  return imageByName[scientificName.toLowerCase()];
+}
+
 type Species = {
   scientificName: string;
   commonName: string;
@@ -15,7 +48,7 @@ const species: Species[] = [
   { scientificName: "Fulica alai", commonName: "Hawaiian Coot", native: true },
   {
     scientificName: "Branta sandvicensis",
-    commonName: "Nene (Hawaiian Goose)",
+    commonName: "Nēnē (Hawaiian Goose)",
     native: true,
   },
   {
@@ -30,7 +63,7 @@ const species: Species[] = [
   },
   {
     scientificName: "Himatione sanguinea",
-    commonName: "Apapane",
+    commonName: "ʻApapane",
     native: true,
   },
   {
@@ -60,7 +93,7 @@ const species: Species[] = [
     native: true,
   },
   { scientificName: "Gygis alba", commonName: "White Tern", native: true },
-  { scientificName: "Drepanis coccinea", commonName: "Iiwi", native: true },
+  { scientificName: "Drepanis coccinea", commonName: "ʻIʻiwi", native: true },
   {
     scientificName: "Phaethon lepturus",
     commonName: "White-tailed Tropicbird",
@@ -224,10 +257,39 @@ function BirdsTable() {
     </div>
   );
 }
+
+function BirdCard({ species }: { species: Species }) {
+  const image = getBirdImage(species.scientificName);
+  return (
+    <div className="rounded-lg shadow-lg p-2">
+      {image && (
+        <img
+          src={image}
+          alt={species.scientificName}
+          className="w-48 h-48 object-cover mx-auto mb-3 rounded"
+        />
+      )}
+      <h3 className="text-lg font-bold text-center">{species.commonName}</h3>
+      <p className="text-gray-700 italic text-center">
+        {species.scientificName}
+      </p>
+      <p className="text-gray-700 text-center">
+        Status: {species.native ? "Native" : "Non-native"}
+      </p>
+    </div>
+  );
+}
+
 function BirdsPage() {
   const [showTable, setShowTable] = useState(true);
   return (
     <div>
+      <div className="flex justify-center items-start content-start flex-wrap mt-10 gap-10">
+        {species.map((s) => {
+          return <BirdCard key={s.scientificName} species={s} />;
+        })}
+      </div>
+
       <button
         className="cursor-pointer mt-4 bg-blue-500 text-white py-2 px-4 rounded"
         onClick={() => {
