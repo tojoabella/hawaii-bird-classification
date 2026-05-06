@@ -1,17 +1,5 @@
-import { useState } from "react";
-
-function ImagePlaceholder() {
-  return (
-    <div className="flex flex-col justify-center items-center w-128 h-64 bg-gray-300 rounded-lg">
-      <p className="text-gray-700 text-center">
-        Drag and drop an image here, or click to browse
-      </p>
-      <button className="mx-4 px-4 py-2 bg-black text-white hover:bg-blue-600 rounded-lg mt-4">
-        Select Image
-      </button>
-    </div>
-  );
-}
+import { useState, useCallback } from "react";
+import { useDropzone } from "react-dropzone";
 
 function ModelCard({
   modelName,
@@ -28,6 +16,43 @@ function ModelCard({
   );
 }
 
+function MyDropzone() {
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
+
+  const onDrop = useCallback((acceptedFiles: File[]) => {
+    setSelectedImage(
+      acceptedFiles.length > 0 ? URL.createObjectURL(acceptedFiles[0]) : null,
+    );
+  }, []);
+
+  const { getRootProps, getInputProps, isDragActive } = useDropzone({
+    onDrop,
+    accept: { "image/*": [] },
+  });
+
+  return (
+    <div className="flex flex-col items-center gap-4">
+      <div
+        {...getRootProps()}
+        className="flex justify-center items-center w-128 h-64 bg-gray-300 rounded-lg  cursor-pointer overflow-hidden"
+      >
+        <input {...getInputProps()} />
+        {selectedImage ? (
+          <img
+            src={selectedImage}
+            alt="Selected"
+            className="w-full h-full object-contain"
+          />
+        ) : isDragActive ? (
+          <p>Drop the image here...</p>
+        ) : (
+          <p>Drag and drop an image here, or click to select a file</p>
+        )}
+      </div>
+    </div>
+  );
+}
+
 function HomePage() {
   const [vggpred, setStateVgg] = useState("");
   const [inceptionpred, setStateInception] = useState("");
@@ -36,8 +61,33 @@ function HomePage() {
   return (
     <>
       <div className="flex justify-center items-center mt-12">
-        <ImagePlaceholder />
+        <MyDropzone />
       </div>
+
+      {/* 
+      {
+        const vgg_model = null; // placeholder for actual model
+        const inception_model = null; // placeholder for actual model
+        const resnet_model = null; // placeholder for actual model
+        const custom_model = null; // placeholder for actual model
+        const image = null; // placeholder for actual image
+        if (vgg_model && image) {
+        res_vgg = vgg_model.predict(image).dataSync();
+        setStateVgg(res_vgg);
+        }
+        if (inception_model && image) {
+        inception_model.predict(image).dataSync();
+        setStateInception(res_inception);
+        }
+        if (resnet_model && image) {
+        resnet_model.predict(image).dataSync();
+        setStateResnet(res_resnet);
+        }
+        if (custom_model && image) {
+        custom_model.predict(image).dataSync();
+        setStateCustom(res_custom);
+        }
+      } */}
       <div className="grid grid-cols-2 md:grid-cols-2 gap-8 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <ModelCard modelName="VGG19" prediction={vggpred} />
         <ModelCard modelName="Inceptionv3" prediction={inceptionpred} />
