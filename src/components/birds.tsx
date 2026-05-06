@@ -285,55 +285,61 @@ function BirdsPage() {
   const [nativeOnly, setNativeOnly] = useState(false);
   const [introducedOnly, setIntroducedOnly] = useState(false);
   return (
-    <div>
-      <h2>Birds of Hawaii used in our Dataset</h2>
-      <p>
-        Note: this is not all birds in the dataset, just the ones we have images
-        for.
-      </p>
-      {/* NATIVE ONLY BUTTON */}
-      <button
-        className={`cursor-pointer text-white rounded m-2 p-2 ${
-          nativeOnly ? "bg-gray-500" : "bg-blue-900"
-        }`}
-        onClick={() => {
-          setNativeOnly(!nativeOnly);
-          if (introducedOnly) setIntroducedOnly(false);
-        }}
-      >
-        Native Only
-      </button>
-      {/* INTRODUCED ONLY BUTTON */}
-      <button
-        className={`cursor-pointer text-white rounded m-2 p-2 ${
-          introducedOnly ? "bg-gray-500" : "bg-blue-900"
-        }`}
-        onClick={() => {
-          setIntroducedOnly(!introducedOnly);
-          if (nativeOnly) setNativeOnly(false);
-        }}
-      >
-        Introduced Only
-      </button>
-      {/* BIRDS TABLE BUTTON */}
-      <button
-        className="cursor-pointer mt-4 bg-blue-900 text-white py-2 px-4 rounded"
-        onClick={() => {
-          setShowTable(!showTable);
-        }}
-      >
-        {showTable ? "Hide Birds Table" : "Show Birds Table"}
-      </button>
-      <div className="flex justify-center items-start content-start flex-wrap mt-10 gap-10">
-        {species
-          .filter((s) => !nativeOnly || s.native)
-          .filter((s) => !introducedOnly || !s.native)
-          .map((s) => {
-            return <BirdCard key={s.scientificName} species={s} />;
-          })}
+    <>
+      <div className="title">
+        <h1>Birds used in our Dataset</h1>
+        <p>Note: this is not all birds in Hawaii.</p>
       </div>
-      {showTable && <BirdsTable />}
-    </div>
+
+      <div>
+        {/* NATIVE ONLY BUTTON */}
+        <div className="flex justify-center">
+          <button
+            className={`cursor-pointer text-white rounded ml-2 p-2 ${
+              nativeOnly ? "bg-gray-500" : "bg-blue-900"
+            }`}
+            onClick={() => {
+              setNativeOnly(!nativeOnly);
+              if (introducedOnly) setIntroducedOnly(false);
+            }}
+          >
+            Native Only
+          </button>
+          {/* INTRODUCED ONLY BUTTON */}
+          <button
+            className={`cursor-pointer text-white rounded ml-2 p-2 ${
+              introducedOnly ? "bg-gray-500" : "bg-blue-900"
+            }`}
+            onClick={() => {
+              setIntroducedOnly(!introducedOnly);
+              if (nativeOnly) setNativeOnly(false);
+            }}
+          >
+            Introduced Only
+          </button>
+          {/* BIRDS TABLE BUTTON */}
+          <button
+            className={`cursor-pointer ml-2 p-2 rounded ${
+              showTable ? "bg-gray-500" : "bg-blue-900"
+            } text-white`}
+            onClick={() => {
+              setShowTable(!showTable);
+            }}
+          >
+            {showTable ? "Hide Birds Table" : "Show Birds Table"}
+          </button>
+        </div>
+        <div className="flex justify-center items-start content-start flex-wrap mt-10 gap-10">
+          {species
+            .filter((s) => !nativeOnly || s.native)
+            .filter((s) => !introducedOnly || !s.native)
+            .map((s) => {
+              return <BirdCard key={s.scientificName} species={s} />;
+            })}
+        </div>
+        {showTable && <BirdsTable />}
+      </div>
+    </>
   );
 }
 

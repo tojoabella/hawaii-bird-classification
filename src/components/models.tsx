@@ -168,21 +168,22 @@ function ModelsPage() {
 
   return (
     <>
-      <div className="flex flex-col justify-center items-center">
-        <h2>Models</h2>
+      <div className="title">
+        <h1>Models</h1>
         <p>Explore the neural network architectures used for classification</p>
-        <div className="flex justify-center items-center mt-12">
-          {models.map((model) => {
-            return (
-              <ModelCard
-                key={model.name}
-                modelName={model.name}
-                onToggleArchitecture={onToggleArchitecture}
-                onToggleResults={onToggleResults}
-              />
-            );
-          })}
-        </div>
+      </div>
+
+      <div className="flex justify-center items-center mt-12">
+        {models.map((model) => {
+          return (
+            <ModelCard
+              key={model.name}
+              modelName={model.name}
+              onToggleArchitecture={onToggleArchitecture}
+              onToggleResults={onToggleResults}
+            />
+          );
+        })}
       </div>
       <ShowArchitecture activeSet={shownArchitectures} />
       <ShowResults activeSet={shownResults} />

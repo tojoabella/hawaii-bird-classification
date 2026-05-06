@@ -1,7 +1,18 @@
 @import "tailwindcss";
 
 @layer base {
-    h2 {
-        @apply text-2xl m-4 tracking-tight;
+    h1 {
+        @apply text-3xl text-gray-900;
+    }
+
+    p {
+        @apply text-sm text-gray-600;
+    }
+
+}
+
+@layer components {
+    .title {
+        @apply flex flex-col items-center gap-3 my-12;
     }
 }
