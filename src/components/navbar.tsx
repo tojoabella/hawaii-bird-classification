@@ -10,14 +10,14 @@ function NavBar({
   const pages = ["home", "models", "birds", "abstract", "contact"];
   return (
     <>
-      <nav className="bg-gray-800 p-4">
-        <div className="container mx-auto flex justify-between items-center">
+      <nav className="bg-gray-800">
+        <div className="container mx-auto flex justify-between items-center h-16">
           {/*first flexbox item */}
-          <div className="text-white text-lg font-bold">
+          <div className="text-white font-medium text-xl font-bold">
             Hawaii Bird Classification
           </div>
           {/*second flexbox item */}
-          <div>
+          <div className="flex gap-1">
             {pages.map((page) => (
               <button
                 key={page}
