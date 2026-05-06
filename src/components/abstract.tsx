@@ -1,8 +1,8 @@
 function AbstractPage() {
   return (
     <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-      <h1 className="text-3xl text-gray-900">Abstract</h1>
-      <h2 className="text-gray-500 mb-6">Author: Tojo Abella</h2>
+      <h2 className="text-3xl text-gray-900">Abstract</h2>
+      <p className="text-gray-500 mb-6">Author: Tojo Abella</p>
 
       <div className="prose prose-sm space-y-8">
         <section>

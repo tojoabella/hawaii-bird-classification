@@ -117,7 +117,7 @@ function ModelCard({
     <div className="bg-white rounded-lg shadow p-6">
       <h3 className="text-lg font-bold text-center">{modelName}</h3>
       <button
-        className="cursor-pointer mt-4 bg-blue-500 text-white py-2 px-4 rounded"
+        className="cursor-pointer mt-4 bg-blue-800 text-white py-2 px-4 rounded"
         onClick={() => {
           onToggleArchitecture(modelName);
         }}
@@ -125,7 +125,7 @@ function ModelCard({
         View Architecture
       </button>
       <button
-        className="cursor-pointer mt-4 bg-green-500 text-white py-2 px-4 rounded"
+        className="cursor-pointer mt-4 bg-blue-800 text-white py-2 px-4 rounded"
         onClick={() => {
           onToggleResults(modelName);
         }}
@@ -168,17 +168,21 @@ function ModelsPage() {
 
   return (
     <>
-      <div className="flex justify-center items-center mt-12">
-        {models.map((model) => {
-          return (
-            <ModelCard
-              key={model.name}
-              modelName={model.name}
-              onToggleArchitecture={onToggleArchitecture}
-              onToggleResults={onToggleResults}
-            />
-          );
-        })}
+      <div className="flex flex-col justify-center items-center">
+        <h2>Models</h2>
+        <p>Explore the neural network architectures used for classification</p>
+        <div className="flex justify-center items-center mt-12">
+          {models.map((model) => {
+            return (
+              <ModelCard
+                key={model.name}
+                modelName={model.name}
+                onToggleArchitecture={onToggleArchitecture}
+                onToggleResults={onToggleResults}
+              />
+            );
+          })}
+        </div>
       </div>
       <ShowArchitecture activeSet={shownArchitectures} />
       <ShowResults activeSet={shownResults} />

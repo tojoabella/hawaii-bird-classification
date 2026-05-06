@@ -286,10 +286,8 @@ function BirdsPage() {
   const [introducedOnly, setIntroducedOnly] = useState(false);
   return (
     <div>
-      <h2 className="text-2xl font-bold mb-4 text-center tracking-wide uppercase text-gray-800">
-        Birds of Hawaii used in our Dataset
-      </h2>
-      <p className="text-2xl font-bold mb-4 text-center tracking-wide uppercase text-gray-800">
+      <h2>Birds of Hawaii used in our Dataset</h2>
+      <p>
         Note: this is not all birds in the dataset, just the ones we have images
         for.
       </p>

@@ -34,7 +34,7 @@ function MyDropzone() {
     <div className="flex flex-col items-center gap-4">
       <div
         {...getRootProps()}
-        className="flex justify-center items-center w-128 h-64 bg-gray-300 rounded-lg  cursor-pointer overflow-hidden"
+        className="flex justify-center items-center w-128 h-64 rounded-lg  cursor-pointer overflow-hidden border-dashed border-2"
       >
         <input {...getInputProps()} />
         {selectedImage ? (
@@ -60,7 +60,9 @@ function HomePage() {
   const [custompred, setStateCustom] = useState("");
   return (
     <>
-      <div className="flex justify-center items-center mt-12">
+      <div className="flex flex-col justify-center items-center mt-12">
+        <h2>Model Inference</h2>
+        <p>Upload an image to classify native vs non-native bird species</p>
         <MyDropzone />
       </div>
 

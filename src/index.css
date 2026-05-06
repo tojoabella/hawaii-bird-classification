@@ -1,1 +1,7 @@
 @import "tailwindcss";
+
+@layer base {
+    h2 {
+        @apply text-2xl m-4 tracking-tight;
+    }
+}
