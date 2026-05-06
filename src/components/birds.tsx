@@ -281,7 +281,7 @@ function BirdCard({ species }: { species: Species }) {
 }
 
 function BirdsPage() {
-  const [showTable, setShowTable] = useState(true);
+  const [showTable, setShowTable] = useState(false);
   const [nativeOnly, setNativeOnly] = useState(false);
   const [introducedOnly, setIntroducedOnly] = useState(false);
   return (
