@@ -32,7 +32,7 @@ const models = [
     results: resnet_results,
     paper: "https://arxiv.org/abs/1603.05027",
     tensorflow:
-      "https://www.tensorflow.org/api_docs/python/tf/keras/applications/resnet50v2",
+      "https://www.tensorflow.org/api_docs/python/tf/keras/applications/ResNet50V2",
   },
   {
     name: "Custom",
