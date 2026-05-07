@@ -97,6 +97,9 @@ function HomePage() {
     };
   }, [selectedImage]);
 
+  const avg = (parseFloat(inceptionpred) + parseFloat(resnetpred)) / 2;
+  const ready = !isNaN(avg);
+
   return (
     <>
       <div className="title">
@@ -109,12 +112,37 @@ function HomePage() {
         setSelectedImage={setSelectedImage}
       />
 
+      {ready && (
+        <div className="m-6 text-center">
+          <div>
+            Final Prediction:{" "}
+            {avg > 0.6 ? "Native" : avg < 0.4 ? "Non-Native" : "Uncertain"}
+          </div>
+          <div>Probability of transfer-learned models: {avg.toFixed(3)}</div>
+        </div>
+      )}
+
       <div className="grid grid-cols-2 md:grid-cols-2 gap-8 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <ModelCard modelName="VGG19" prediction={vggpred} />
-        <ModelCard modelName="Inceptionv3" prediction={inceptionpred} />
-        <ModelCard modelName="ResNet50v2" prediction={resnetpred} />
-        <ModelCard modelName="Custom" prediction={custompred} />
+        <ModelCard
+          modelName="VGG19"
+          prediction={parseFloat(vggpred).toFixed(3)}
+        />
+        <ModelCard
+          modelName="Inceptionv3"
+          prediction={parseFloat(inceptionpred).toFixed(3)}
+        />
+        <ModelCard
+          modelName="ResNet50v2"
+          prediction={parseFloat(resnetpred).toFixed(3)}
+        />
+        <ModelCard
+          modelName="Custom"
+          prediction={parseFloat(custompred).toFixed(3)}
+        />
       </div>
+      {ready && (
+        <div>Final Prediction: {avg > 0.5 ? "Native" : "Non-Native"}</div>
+      )}
     </>
   );
 }
