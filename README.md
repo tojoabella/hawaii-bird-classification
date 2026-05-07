@@ -43,6 +43,14 @@ Preview the production build locally:
 npm run preview
 ```
 
+## Lint
+
+```
+npm run lint
+```
+
+Or use the `Prettier` vscode extension and toggle on `format on save` setting.
+
 ## Deploy
 
 The site is deployed to GitHub Pages from the `gh-pages` branch.
