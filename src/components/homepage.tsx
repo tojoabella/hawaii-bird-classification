@@ -73,18 +73,24 @@ function HomePage() {
     if (!selectedImage) return;
     let cancelled = false;
 
-    Predict.PredictVGG19(selectedImage).then((p) => {
-      if (!cancelled) setStateVgg(p.toString());
-    });
-    Predict.PredictInceptionV3(selectedImage).then((p) => {
-      if (!cancelled) setStateInception(p.toString());
-    });
-    Predict.PredictResNet50V2(selectedImage).then((p) => {
-      if (!cancelled) setStateResnet(p.toString());
-    });
-    Predict.PredictCustom(selectedImage).then((p) => {
-      if (!cancelled) setStateCustom(p.toString());
-    });
+    const img = new Image();
+    img.crossOrigin = "anonymous";
+    img.src = selectedImage;
+    img.onload = () => {
+      if (cancelled) return;
+      Predict.PredictVGG19(img).then((p) => {
+        if (!cancelled) setStateVgg(p);
+      });
+      Predict.PredictInceptionV3(img).then((p) => {
+        if (!cancelled) setStateInception(p);
+      });
+      Predict.PredictResNet50V2(img).then((p) => {
+        if (!cancelled) setStateResnet(p);
+      });
+      Predict.PredictCustom(img).then((p) => {
+        if (!cancelled) setStateCustom(p);
+      });
+    };
 
     return () => {
       cancelled = true;
