@@ -117,7 +117,7 @@ function ModelCard({
     <div className="bg-white rounded-lg shadow p-6">
       <h3 className="text-lg font-bold text-center">{modelName}</h3>
       <button
-        className="cursor-pointer mt-4 bg-blue-800 text-white py-2 px-4 rounded"
+        className="cursor-pointer mt-4 bg-blue-900 text-white py-2 px-4 rounded"
         onClick={() => {
           onToggleArchitecture(modelName);
         }}
@@ -125,7 +125,7 @@ function ModelCard({
         View Architecture
       </button>
       <button
-        className="cursor-pointer mt-4 bg-blue-800 text-white py-2 px-4 rounded"
+        className="mx-2 cursor-pointer mt-4 bg-blue-900 text-white py-2 px-4 rounded"
         onClick={() => {
           onToggleResults(modelName);
         }}
