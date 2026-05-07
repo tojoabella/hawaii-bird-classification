@@ -113,36 +113,42 @@ function HomePage() {
       />
 
       {ready && (
-        <div className="m-6 text-center">
-          <div>
+        <div className="mt-6 text-center">
+          <h2 className="text-2xl">
             Final Prediction:{" "}
-            {avg > 0.6 ? "Native" : avg < 0.4 ? "Non-Native" : "Uncertain"}
-          </div>
-          <div>Probability of transfer-learned models: {avg.toFixed(3)}</div>
+            <span className="font-bold">
+              {avg > 0.6 ? "Native" : avg < 0.4 ? "Non-Native" : "Uncertain"}
+            </span>
+          </h2>
         </div>
       )}
 
-      <div className="grid grid-cols-2 md:grid-cols-2 gap-8 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <ModelCard
-          modelName="VGG19"
-          prediction={parseFloat(vggpred).toFixed(3)}
-        />
-        <ModelCard
-          modelName="Inceptionv3"
-          prediction={parseFloat(inceptionpred).toFixed(3)}
-        />
-        <ModelCard
-          modelName="ResNet50v2"
-          prediction={parseFloat(resnetpred).toFixed(3)}
-        />
-        <ModelCard
-          modelName="Custom"
-          prediction={parseFloat(custompred).toFixed(3)}
-        />
+      <div>
+        <h3 className="text-xl text-gray-800 sm:mt-8 lg:mt-12 md:mt-10 text-center">
+          Individual model predictions:
+        </h3>
+        <div className="grid grid-cols-2 md:grid-cols-2 gap-8 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <ModelCard
+            modelName="VGG19"
+            prediction={parseFloat(vggpred).toFixed(3)}
+          />
+          <ModelCard
+            modelName="Inceptionv3"
+            prediction={parseFloat(inceptionpred).toFixed(3)}
+          />
+          <ModelCard
+            modelName="ResNet50v2"
+            prediction={parseFloat(resnetpred).toFixed(3)}
+          />
+          <ModelCard
+            modelName="Custom"
+            prediction={parseFloat(custompred).toFixed(3)}
+          />
+        </div>
+        <p className="text-center py-4">
+          Probability of (inceptionv3 + resnet)/2 = {avg.toFixed(3)}
+        </p>
       </div>
-      {ready && (
-        <div>Final Prediction: {avg > 0.5 ? "Native" : "Non-Native"}</div>
-      )}
     </>
   );
 }
