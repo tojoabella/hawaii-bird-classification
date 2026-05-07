@@ -3,10 +3,11 @@ import NavBar from "./components/navbar";
 
 import HomePage from "./components/homepage";
 import AbstractPage from "./components/abstract";
+import BirdsPage from "./components/birds";
+import ContactsPage from "./components/contacts";
 import ModelsPage from "./components/models";
 
 import "./App.css";
-import BirdsPage from "./components/birds";
 
 function App() {
   const [activePage, setActivePage] = useState("home");
@@ -23,6 +24,8 @@ function App() {
           <ModelsPage />
         ) : activePage === "birds" ? (
           <BirdsPage />
+        ) : activePage === "contact" ? (
+          <ContactsPage />
         ) : (
           <div className="p-8">Page under construction</div>
         )}
