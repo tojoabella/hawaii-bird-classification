@@ -1,4 +1,4 @@
-import { use, useState } from "react";
+import { useState } from "react";
 
 // an object mapping bird image file paths to their URLs
 /*
