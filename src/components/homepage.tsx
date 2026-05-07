@@ -1,5 +1,7 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 import { useDropzone } from "react-dropzone";
+
+import Predict from "./model_inference";
 
 function ModelCard({
   modelName,
@@ -16,14 +18,21 @@ function ModelCard({
   );
 }
 
-function MyDropzone() {
-  const [selectedImage, setSelectedImage] = useState<string | null>(null);
-
-  const onDrop = useCallback((acceptedFiles: File[]) => {
-    setSelectedImage(
-      acceptedFiles.length > 0 ? URL.createObjectURL(acceptedFiles[0]) : null,
-    );
-  }, []);
+function MyDropzone({
+  selectedImage,
+  setSelectedImage,
+}: {
+  selectedImage: string | null;
+  setSelectedImage: React.Dispatch<React.SetStateAction<string | null>>;
+}) {
+  const onDrop = useCallback(
+    (acceptedFiles: File[]) => {
+      setSelectedImage(
+        acceptedFiles.length > 0 ? URL.createObjectURL(acceptedFiles[0]) : null,
+      );
+    },
+    [setSelectedImage],
+  );
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop,
@@ -58,6 +67,30 @@ function HomePage() {
   const [inceptionpred, setStateInception] = useState("");
   const [resnetpred, setStateResnet] = useState("");
   const [custompred, setStateCustom] = useState("");
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (!selectedImage) return;
+    let cancelled = false;
+
+    Predict.PredictVGG19(selectedImage).then((p) => {
+      if (!cancelled) setStateVgg(p.toString());
+    });
+    Predict.PredictInceptionV3(selectedImage).then((p) => {
+      if (!cancelled) setStateInception(p.toString());
+    });
+    Predict.PredictResNet50V2(selectedImage).then((p) => {
+      if (!cancelled) setStateResnet(p.toString());
+    });
+    Predict.PredictCustom(selectedImage).then((p) => {
+      if (!cancelled) setStateCustom(p.toString());
+    });
+
+    return () => {
+      cancelled = true;
+    };
+  }, [selectedImage]);
+
   return (
     <>
       <div className="title">
@@ -65,31 +98,11 @@ function HomePage() {
         <p>Upload an image to classify native vs non-native bird species</p>
       </div>
 
-      <MyDropzone />
-      {/* 
-      {
-        const vgg_model = null; // placeholder for actual model
-        const inception_model = null; // placeholder for actual model
-        const resnet_model = null; // placeholder for actual model
-        const custom_model = null; // placeholder for actual model
-        const image = null; // placeholder for actual image
-        if (vgg_model && image) {
-        res_vgg = vgg_model.predict(image).dataSync();
-        setStateVgg(res_vgg);
-        }
-        if (inception_model && image) {
-        inception_model.predict(image).dataSync();
-        setStateInception(res_inception);
-        }
-        if (resnet_model && image) {
-        resnet_model.predict(image).dataSync();
-        setStateResnet(res_resnet);
-        }
-        if (custom_model && image) {
-        custom_model.predict(image).dataSync();
-        setStateCustom(res_custom);
-        }
-      } */}
+      <MyDropzone
+        selectedImage={selectedImage}
+        setSelectedImage={setSelectedImage}
+      />
+
       <div className="grid grid-cols-2 md:grid-cols-2 gap-8 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <ModelCard modelName="VGG19" prediction={vggpred} />
         <ModelCard modelName="Inceptionv3" prediction={inceptionpred} />
