@@ -43,7 +43,7 @@ function MyDropzone({
     <div className="flex flex-col items-center gap-4">
       <div
         {...getRootProps()}
-        className="flex justify-center items-center w-128 h-64 rounded-lg  cursor-pointer overflow-hidden border-dashed border-2 border-gray-300 bg-gray-50"
+        className="flex justify-center items-center w-128 h-64 rounded-lg cursor-pointer overflow-hidden border-dashed border-2 border-gray-300 bg-gray-50"
       >
         <input {...getInputProps()} />
         {selectedImage ? (
