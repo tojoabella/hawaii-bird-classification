@@ -50,30 +50,29 @@ function ShowArchitecture({ activeSet }: { activeSet: Set<string> }) {
         const model = models.find((m) => m.name === modelName);
         if (!model) return null;
         return (
-          <>
-            <div className="flex flex-col items-center justify-center gap-10">
-              <p className="text-2xl font-bold mb-4">
-                {modelName} Architecture
-              </p>
-              {model.paper !== "#" && (
-                <a
-                  href={model.paper}
-                  className="text-blue-600 underline hover:text-blue-800"
-                >
-                  Research paper
-                </a>
-              )}
-              {model.tensorflow !== "#" && (
-                <a
-                  href={model.tensorflow}
-                  className="text-blue-600 underline hover:text-blue-800"
-                >
-                  Tensorflow documentation
-                </a>
-              )}
-              <img src={model.image} alt={modelName} className="m-4" />
-            </div>
-          </>
+          <div
+            key={modelName}
+            className="flex flex-col items-center justify-center gap-10"
+          >
+            <p className="text-2xl font-bold mb-4">{modelName} Architecture</p>
+            {model.paper !== "#" && (
+              <a
+                href={model.paper}
+                className="text-blue-600 underline hover:text-blue-800"
+              >
+                Research paper
+              </a>
+            )}
+            {model.tensorflow !== "#" && (
+              <a
+                href={model.tensorflow}
+                className="text-blue-600 underline hover:text-blue-800"
+              >
+                Tensorflow documentation
+              </a>
+            )}
+            <img src={model.image} alt={modelName} className="m-4" />
+          </div>
         );
       })}
     </div>
@@ -87,12 +86,13 @@ function ShowResults({ activeSet }: { activeSet: Set<string> }) {
         const model = models.find((m) => m.name === modelName);
         if (!model) return null;
         return (
-          <>
-            <div className="flex flex-col items-center justify-center gap-10">
-              <p className="text-2xl font-bold mb-4">{modelName} Results</p>
-              <img src={model.results} alt={`${modelName} results`} />
-            </div>
-          </>
+          <div
+            key={modelName}
+            className="flex flex-col items-center justify-center gap-10"
+          >
+            <p className="text-2xl font-bold mb-4">{modelName} Results</p>
+            <img src={model.results} alt={`${modelName} results`} />
+          </div>
         );
       })}
     </div>
