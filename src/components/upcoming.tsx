@@ -71,9 +71,9 @@ const Todos: Todo[] = [
     priority: 1,
   },
   {
-    name: "Mobie Application",
+    name: "Mobile Application",
     description:
-      "Deploy lightweight model variant for i0S and Andriod devices.",
+      "Deploy lightweight model variant for iOS and Android devices.",
     priority: 2,
   },
 ];
