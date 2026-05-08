@@ -69,10 +69,10 @@ function BirdsPage() {
         <div className="flex justify-center">
           <button
             className={`cursor-pointer text-white rounded ml-2 p-2 ${
-              filter == "native" ? "bg-gray-500" : "bg-blue-900"
+              filter === "native" ? "bg-gray-500" : "bg-blue-900"
             }`}
             onClick={() => {
-              setFilter(filter == "native" ? "all" : "native");
+              setFilter(filter === "native" ? "all" : "native");
             }}
           >
             Native Only
@@ -80,10 +80,10 @@ function BirdsPage() {
           {/* INTRODUCED ONLY BUTTON */}
           <button
             className={`cursor-pointer text-white rounded ml-2 p-2 ${
-              filter == "introduced" ? "bg-gray-500" : "bg-blue-900"
+              filter === "introduced" ? "bg-gray-500" : "bg-blue-900"
             }`}
             onClick={() => {
-              setFilter(filter == "introduced" ? "all" : "introduced");
+              setFilter(filter === "introduced" ? "all" : "introduced");
             }}
           >
             Introduced Only
@@ -102,8 +102,8 @@ function BirdsPage() {
         </div>
         <div className="flex justify-center items-start content-start flex-wrap mt-10 gap-10">
           {species
-            .filter((s) => (filter == "native" ? s.native : true))
-            .filter((s) => (filter == "introduced" ? !s.native : true))
+            .filter((s) => (filter === "native" ? s.native : true))
+            .filter((s) => (filter === "introduced" ? !s.native : true))
             .map((s) => {
               return <BirdCard key={s.scientificName} species={s} />;
             })}
