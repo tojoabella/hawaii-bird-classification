@@ -18,5 +18,5 @@
 
     .page_container {
         @apply py-4 sm:py-8 md:py-12;
-        }
+    }
 }
