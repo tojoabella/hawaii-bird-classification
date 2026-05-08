@@ -103,7 +103,7 @@ function TodoCard({ todo }: { todo: Todo }) {
 function UpcomingPage() {
   const todos_sorted = Todos.sort((a, b) => a.priority - b.priority);
   return (
-    <>
+    <div className="page_container">
       <div className="title">
         <h1>Upcoming</h1>
         <p>Future improvements and research directions</p>
@@ -113,7 +113,7 @@ function UpcomingPage() {
           return <TodoCard todo={t} key={t.name} />;
         })}
       </div>
-    </>
+    </div>
   );
 }
 

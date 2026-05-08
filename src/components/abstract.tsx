@@ -1,6 +1,6 @@
 function AbstractPage() {
   return (
-    <>
+    <div className="page_container">
       <div className="title">
         <h1>Abstract</h1>
         <p>Author: Tojo Abella</p>
@@ -187,7 +187,7 @@ function AbstractPage() {
           </section>
         </div>
       </div>
-    </>
+    </div>
   );
 }
 

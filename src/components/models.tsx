@@ -167,7 +167,7 @@ function ModelsPage() {
   };
 
   return (
-    <>
+    <div className="page_container">
       <div className="title">
         <h1>Models</h1>
         <p>Explore the neural network architectures used for classification</p>
@@ -187,7 +187,7 @@ function ModelsPage() {
       </div>
       <ShowArchitecture activeSet={shownArchitectures} />
       <ShowResults activeSet={shownResults} />
-    </>
+    </div>
   );
 }
 

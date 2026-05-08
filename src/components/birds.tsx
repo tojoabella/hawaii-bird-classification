@@ -285,7 +285,7 @@ function BirdsPage() {
   const [nativeOnly, setNativeOnly] = useState(false);
   const [introducedOnly, setIntroducedOnly] = useState(false);
   return (
-    <>
+    <div className="page_container">
       <div className="title">
         <h1>Birds</h1>
         <p>
@@ -342,7 +342,7 @@ function BirdsPage() {
         </div>
         {showTable && <BirdsTable />}
       </div>
-    </>
+    </div>
   );
 }
 

@@ -1,6 +1,6 @@
 function ContactsPage() {
   return (
-    <>
+    <div className="page_container">
       <div className="title">
         <h1>Contact</h1>
       </div>

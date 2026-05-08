@@ -101,7 +101,7 @@ function HomePage() {
   const ready = !isNaN(avg);
 
   return (
-    <>
+    <div className="page_container">
       <div className="title">
         <h1>Model Inference</h1>
         <p>Upload an image to classify native vs non-native bird species</p>
@@ -149,7 +149,7 @@ function HomePage() {
           Probability of (inceptionv3 + resnet)/2 = {avg.toFixed(3)}
         </p>
       </div>
-    </>
+    </div>
   );
 }
 
