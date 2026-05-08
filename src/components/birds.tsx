@@ -282,8 +282,8 @@ function BirdCard({ species }: { species: Species }) {
 
 function BirdsPage() {
   const [showTable, setShowTable] = useState(false);
-  const [nativeOnly, setNativeOnly] = useState(false);
-  const [introducedOnly, setIntroducedOnly] = useState(false);
+  const [filter, setFilter] = useState<"all" | "native" | "introduced">("all");
+
   return (
     <div className="page_container">
       <div className="title">
@@ -299,11 +299,10 @@ function BirdsPage() {
         <div className="flex justify-center">
           <button
             className={`cursor-pointer text-white rounded ml-2 p-2 ${
-              nativeOnly ? "bg-gray-500" : "bg-blue-900"
+              filter == "native" ? "bg-gray-500" : "bg-blue-900"
             }`}
             onClick={() => {
-              setNativeOnly(!nativeOnly);
-              if (introducedOnly) setIntroducedOnly(false);
+              setFilter(filter == "native" ? "all" : "native");
             }}
           >
             Native Only
@@ -311,11 +310,10 @@ function BirdsPage() {
           {/* INTRODUCED ONLY BUTTON */}
           <button
             className={`cursor-pointer text-white rounded ml-2 p-2 ${
-              introducedOnly ? "bg-gray-500" : "bg-blue-900"
+              filter == "introduced" ? "bg-gray-500" : "bg-blue-900"
             }`}
             onClick={() => {
-              setIntroducedOnly(!introducedOnly);
-              if (nativeOnly) setNativeOnly(false);
+              setFilter(filter == "introduced" ? "all" : "introduced");
             }}
           >
             Introduced Only
@@ -334,8 +332,8 @@ function BirdsPage() {
         </div>
         <div className="flex justify-center items-start content-start flex-wrap mt-10 gap-10">
           {species
-            .filter((s) => !nativeOnly || s.native)
-            .filter((s) => !introducedOnly || !s.native)
+            .filter((s) => (filter == "native" ? s.native : true))
+            .filter((s) => (filter == "introduced" ? !s.native : true))
             .map((s) => {
               return <BirdCard key={s.scientificName} species={s} />;
             })}
