@@ -9,30 +9,24 @@ import ModelsPage from "./components/models";
 import UpcomingPage from "./components/upcoming";
 
 import "./App.css";
+import type { Page } from "./types";
 
 function App() {
-  const [activePage, setActivePage] = useState("home");
+  const [activePage, setActivePage] = useState<Page>("home");
+
+  const pages: Record<Page, React.ReactNode> = {
+    home: <HomePage />,
+    abstract: <AbstractPage />,
+    birds: <BirdsPage />,
+    models: <ModelsPage />,
+    upcoming: <UpcomingPage />,
+    contact: <ContactsPage />,
+  };
 
   return (
     <>
       <NavBar activePage={activePage} setActivePage={setActivePage} />
-      <main>
-        {activePage === "home" ? (
-          <HomePage />
-        ) : activePage === "abstract" ? (
-          <AbstractPage />
-        ) : activePage === "models" ? (
-          <ModelsPage />
-        ) : activePage === "birds" ? (
-          <BirdsPage />
-        ) : activePage === "contact" ? (
-          <ContactsPage />
-        ) : activePage === "upcoming" ? (
-          <UpcomingPage />
-        ) : (
-          <div className="p-8">Page under construction</div>
-        )}
-      </main>
+      {pages[activePage] ?? <div className="p-8">Page under construction</div>}
     </>
   );
 }

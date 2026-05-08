@@ -1,11 +1,14 @@
+import type { Dispatch, SetStateAction } from "react";
+
+import { PAGES, type Page } from "../types";
+
 function NavBar({
   activePage,
   setActivePage,
 }: {
-  activePage: string;
-  setActivePage: (page: string) => void;
+  activePage: Page;
+  setActivePage: Dispatch<SetStateAction<Page>>;
 }) {
-  const pages = ["home", "models", "birds", "abstract", "upcoming", "contact"];
   return (
     <>
       <nav className="bg-gray-800">
@@ -16,7 +19,7 @@ function NavBar({
           </div>
           {/*second flexbox item */}
           <div className="flex gap-1">
-            {pages.map((page) => (
+            {PAGES.map((page) => (
               <button
                 key={page}
                 className={`cursor-pointer text-gray-300 hover:text-white mx-2 ${
