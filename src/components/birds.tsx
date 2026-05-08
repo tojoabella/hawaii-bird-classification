@@ -287,8 +287,11 @@ function BirdsPage() {
   return (
     <>
       <div className="title">
-        <h1>Birds used in our Dataset</h1>
-        <p>Note: this is not all birds in Hawaii.</p>
+        <h1>Birds</h1>
+        <p>
+          A subset of birds found in Hawaii whose images were used for model
+          training.
+        </p>
       </div>
 
       <div>
