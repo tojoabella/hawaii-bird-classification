@@ -6,6 +6,7 @@ import AbstractPage from "./components/abstract";
 import BirdsPage from "./components/birds";
 import ContactsPage from "./components/contacts";
 import ModelsPage from "./components/models";
+import UpcomingPage from "./components/upcoming";
 
 import "./App.css";
 
@@ -26,6 +27,8 @@ function App() {
           <BirdsPage />
         ) : activePage === "contact" ? (
           <ContactsPage />
+        ) : activePage === "upcoming" ? (
+          <UpcomingPage />
         ) : (
           <div className="p-8">Page under construction</div>
         )}

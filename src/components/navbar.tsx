@@ -5,7 +5,7 @@ function NavBar({
   activePage: string;
   setActivePage: (page: string) => void;
 }) {
-  const pages = ["home", "models", "birds", "abstract", "contact"];
+  const pages = ["home", "models", "birds", "abstract", "upcoming", "contact"];
   return (
     <>
       <nav className="bg-gray-800">
