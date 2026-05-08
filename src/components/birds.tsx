@@ -69,7 +69,7 @@ function BirdsPage() {
         <div className="flex justify-center">
           <button
             className={`cursor-pointer text-white rounded ml-2 p-2 ${
-              filter === "native" ? "bg-gray-500" : "bg-blue-900"
+              filter === "native" ? "bg-blue-200" : "bg-blue-900"
             }`}
             onClick={() => {
               setFilter(filter === "native" ? "all" : "native");
@@ -80,7 +80,7 @@ function BirdsPage() {
           {/* INTRODUCED ONLY BUTTON */}
           <button
             className={`cursor-pointer text-white rounded ml-2 p-2 ${
-              filter === "introduced" ? "bg-gray-500" : "bg-blue-900"
+              filter === "introduced" ? "bg-blue-200" : "bg-blue-900"
             }`}
             onClick={() => {
               setFilter(filter === "introduced" ? "all" : "introduced");
@@ -91,7 +91,7 @@ function BirdsPage() {
           {/* BIRDS TABLE BUTTON */}
           <button
             className={`cursor-pointer ml-2 p-2 rounded ${
-              showTable ? "bg-gray-500" : "bg-blue-900"
+              showTable ? "bg-blue-200" : "bg-blue-900"
             } text-white`}
             onClick={() => {
               setShowTable(!showTable);

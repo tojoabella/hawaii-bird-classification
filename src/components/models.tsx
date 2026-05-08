@@ -103,10 +103,14 @@ function ModelCard({
   modelName,
   onToggleArchitecture,
   onToggleResults,
+  shownArchitectures,
+  shownResults,
 }: {
   modelName: string;
   onToggleArchitecture: (modelName: string) => void;
   onToggleResults: (modelName: string) => void;
+  shownArchitectures: Set<string>;
+  shownResults: Set<string>;
 }) {
   /*
     Note: In react, arguments are called props, and props must be a single object passed from parent to child. Instead of passing multiple arguments to ModelCard, we pass a single object that contains all the necessary information (modelName and onToggle function).
@@ -117,15 +121,16 @@ function ModelCard({
     <div className="bg-white rounded-lg shadow p-6">
       <h3 className="text-lg font-bold text-center">{modelName}</h3>
       <button
-        className="cursor-pointer mt-4 bg-blue-900 text-white py-2 px-4 rounded"
+        className={`cursor-pointer mt-4 text-white py-2 px-4 rounded ${shownArchitectures.has(modelName) ? "bg-blue-200" : "bg-blue-900"}`}
         onClick={() => {
           onToggleArchitecture(modelName);
         }}
       >
         View Architecture
       </button>
+
       <button
-        className="mx-2 cursor-pointer mt-4 bg-blue-900 text-white py-2 px-4 rounded"
+        className={`mx-2 cursor-pointer mt-4 text-white py-2 px-4 rounded ${shownResults.has(modelName) ? "bg-blue-200" : "bg-blue-900"}`}
         onClick={() => {
           onToggleResults(modelName);
         }}
@@ -181,6 +186,8 @@ function ModelsPage() {
               modelName={model.name}
               onToggleArchitecture={onToggleArchitecture}
               onToggleResults={onToggleResults}
+              shownArchitectures={shownArchitectures}
+              shownResults={shownResults}
             />
           );
         })}
