@@ -12,10 +12,10 @@ function PreprocessImage(image: HTMLImageElement): tf.Tensor {
 }
 
 const MODEL_PATHS = {
-  vgg19: "/tfjs_models/vgg19/model.json",
-  inceptionv3: "/tfjs_models/inceptionv3/model.json",
-  resnet50v2: "/tfjs_models/resnet50v2/model.json",
-  custom: "/tfjs_models/custom/model.json",
+  vgg19: `${import.meta.env.BASE_URL}tfjs_models/vgg19/model.json`,
+  inceptionv3: `${import.meta.env.BASE_URL}tfjs_models/inceptionv3/model.json`,
+  resnet50v2: `${import.meta.env.BASE_URL}tfjs_models/resnet50v2/model.json`,
+  custom: `${import.meta.env.BASE_URL}tfjs_models/custom/model.json`,
 };
 
 const modelCache = new Map<string, Promise<tf.LayersModel>>();
