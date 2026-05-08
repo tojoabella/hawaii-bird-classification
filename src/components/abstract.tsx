@@ -3,7 +3,7 @@ function AbstractPage() {
     <>
       <div className="title">
         <h1>Abstract</h1>
-        <p className="text-gray-500 mb-6">Author: Tojo Abella</p>
+        <p>Author: Tojo Abella</p>
       </div>
       <div className="max-w-3xl mx-auto">
         <div className="prose prose-sm space-y-8">
