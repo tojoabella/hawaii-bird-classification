@@ -206,7 +206,7 @@ export const species: Species[] = [
   ...
 }
 */
-const birdImages = import.meta.glob<string>("../assets/birds/*.jpg", {
+const birdImages = import.meta.glob<string>("../../assets/birds/*.jpg", {
   eager: true,
   import: "default",
   query: "?url",
