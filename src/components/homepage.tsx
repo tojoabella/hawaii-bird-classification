@@ -112,19 +112,23 @@ function HomePage() {
         setSelectedImage={setSelectedImage}
       />
 
-      {ready && (
-        <div className="mt-6 text-center">
-          <h2 className="text-2xl">
-            Final Prediction:{" "}
-            <span className="font-bold">
-              {avg > 0.6 ? "Native" : avg < 0.4 ? "Non-Native" : "Uncertain"}
-            </span>
-          </h2>
-        </div>
-      )}
+      <div className="mt-6 text-center max-h-2xl">
+        <h2 className="text-2xl">
+          Final Prediction:{" "}
+          <span className="font-bold">
+            {ready
+              ? avg > 0.6
+                ? "Native"
+                : avg < 0.4
+                  ? "Non-Native"
+                  : "Uncertain"
+              : ""}
+          </span>
+        </h2>
+      </div>
 
       <div>
-        <h3 className="text-md text-gray-600 mt-4 sm:mt-8 md:mt-10 lg:mt-12 text-center underline decoration-gray-600 pb-2">
+        <h3 className="text-lg text-blue-950 mt-4 sm:mt-8 md:mt-10 lg:mt-12 text-center underline decoration-gray-600 pb-2">
           Individual model predictions:
         </h3>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
