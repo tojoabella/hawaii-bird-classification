@@ -9,7 +9,7 @@ function NavBar({
   return (
     <>
       <nav className="bg-gray-800">
-        <div className="container mx-auto flex justify-between items-center h-16">
+        <div className="max-w-7xl mx-auto flex justify-between items-center h-16 px-4 sm:px-6 lg:px-8">
           {/*first flexbox item */}
           <div className="text-white font-medium text-xl font-bold">
             Hawaii Bird Classification

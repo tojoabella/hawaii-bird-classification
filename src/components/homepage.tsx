@@ -124,10 +124,10 @@ function HomePage() {
       )}
 
       <div>
-        <h3 className="text-md text-gray-600 sm:mt-8 lg:mt-12 md:mt-10 text-center underline decoration-gray-600 pb-2">
+        <h3 className="text-md text-gray-600 mt-4 sm:mt-8 md:mt-10 lg:mt-12 text-center underline decoration-gray-600 pb-2">
           Individual model predictions:
         </h3>
-        <div className="grid grid-cols-2 md:grid-cols-2 gap-8 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <ModelCard
             modelName="VGG19"
             prediction={parseFloat(vggpred).toFixed(3)}
